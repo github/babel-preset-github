@@ -1,0 +1,23 @@
+{
+  "name": "babel-preset-github",
+  "version": "1.0.0",
+  "description": "GitHub.com's Babel configuration",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/core": "^7.0.0-beta.56",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.56",
+    "@babel/plugin-proposal-json-strings": "^7.0.0-beta.56",
+    "@babel/plugin-proposal-optional-catch-binding": "^7.0.0-beta.56",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.56",
+    "@babel/plugin-syntax-import-meta": "^7.0.0-beta.56",
+    "@babel/plugin-transform-flow-strip-types": "^7.0.0-beta.56",
+    "@babel/preset-env": "^7.0.0-beta.56",
+    "babel-plugin-transform-invariant-location": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "GitHub Inc",
+  "license": "MIT"
+}
