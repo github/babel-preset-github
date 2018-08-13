@@ -7,8 +7,17 @@ const defaultBrowsers = [
   'IE 11',
   'Firefox >= 45'
 ]
+const mobileBrowsers = [
+  'Chrome >= 55',
+  'Firefox >= 53',
+  'Safari >= 10.3',
+  'Edge >= 15',
+  'Opera >= 42'
+]
 module.exports = function babelPresetGitHub({ modules = false, targets = {} }) {
   targets = Object.assign({}, { browsers: defaultBrowsers }, targets)
+  if (targets.browsers === 'mobile') targets.browsers = mobileBrowsers
+  if (targets.browsers === 'default') targets.browsers = defaultBrowsers
   return {
     plugins: [
       // ES2019
