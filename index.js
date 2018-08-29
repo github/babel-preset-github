@@ -21,9 +21,6 @@ module.exports = function babelPresetGitHub(api, { modules = false, targets = {}
   return {
     plugins: [
       // ES2019
-      // Stage 4
-      require('@babel/plugin-proposal-json-strings').default,
-      require('@babel/plugin-proposal-optional-catch-binding').default,
       // Stage 3 with good signals for Stage 4
       // Chrome 64+, Firefox 62+, Safari TP42, Opera 51+
       require('@babel/plugin-syntax-import-meta').default,
