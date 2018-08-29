@@ -14,7 +14,7 @@ const mobileBrowsers = [
   'Edge >= 15',
   'Opera >= 42'
 ]
-module.exports = function babelPresetGitHub({ modules = false, targets = {} }) {
+module.exports = function babelPresetGitHub(api, { modules = false, targets = {} }) {
   targets = Object.assign({}, { browsers: defaultBrowsers }, targets)
   if (targets.browsers === 'mobile') targets.browsers = mobileBrowsers
   if (targets.browsers === 'default') targets.browsers = defaultBrowsers
