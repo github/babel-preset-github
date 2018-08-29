@@ -14,16 +14,13 @@ const mobileBrowsers = [
   'Edge >= 15',
   'Opera >= 42'
 ]
-module.exports = function babelPresetGitHub({ modules = false, targets = {} }) {
+module.exports = function babelPresetGitHub(api, { modules = false, targets = {} }) {
   targets = Object.assign({}, { browsers: defaultBrowsers }, targets)
   if (targets.browsers === 'mobile') targets.browsers = mobileBrowsers
   if (targets.browsers === 'default') targets.browsers = defaultBrowsers
   return {
     plugins: [
       // ES2019
-      // Stage 4
-      require('@babel/plugin-proposal-json-strings').default,
-      require('@babel/plugin-proposal-optional-catch-binding').default,
       // Stage 3 with good signals for Stage 4
       // Chrome 64+, Firefox 62+, Safari TP42, Opera 51+
       require('@babel/plugin-syntax-import-meta').default,
