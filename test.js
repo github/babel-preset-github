@@ -74,9 +74,16 @@ var _bar = require("bar");`,
 )
 
 test(
-  'classes get transformed down on desktop',
+  'classes dont get transformed down on desktop',
   `class Foo {}`,
-  /_classCallCheck/
+  `class Foo {}`,
+)
+
+test(
+  'classes dont get transformed down on desktop',
+  `class Foo {}`,
+  /_classCallCheck/,
+  { presets: [["./", { targets: { browsers: 'IE 11' } }]]}
 )
 
 test(
@@ -87,9 +94,9 @@ test(
 )
 
 test(
-  'async gets transformed down on desktop',
-  'async function foo() {}',
-  /asyncGeneratorStep/
+  'async does not get transformed on desktop',
+  `async function foo() {}`,
+  /asyncGeneratorStep/,
 )
 
 test(
