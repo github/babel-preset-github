@@ -17,6 +17,7 @@ const test = (name, pre, expected, options = { presets: ["./"] }) => {
   } catch (e) {
     console.log(`${fail} ${name}`)
     console.log(e.stack)
+    exit = 1
   }
 }
 
