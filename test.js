@@ -97,7 +97,14 @@ test(
 test(
   'async does not get transformed on desktop',
   `async function foo() {}`,
+  `async function foo() {}`,
+)
+
+test(
+  'async gets transformed with custom profile',
+  `async function foo() {}`,
   /asyncGeneratorStep/,
+  { presets: [["./", { targets: { browsers: 'IE 11' } }]]}
 )
 
 test(
