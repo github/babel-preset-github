@@ -9,9 +9,8 @@
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-syntax-import-meta": "^7.0.0",
     "@babel/plugin-transform-flow-strip-types": "^7.0.0",
-    "@babel/preset-env": "^7.1.5",
-    "babel-plugin-transform-invariant-location": "^1.0.0",
-    "caniuse-lite": "^1.0.30000912"
+    "@babel/preset-env": "^7.2.3",
+    "babel-plugin-transform-invariant-location": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.5"
