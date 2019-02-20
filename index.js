@@ -4,11 +4,11 @@ const defaultBrowsers = [
   'last 3 Safari versions',
   'last 4 Edge versions',
   'Firefox ESR',
-  'Chrome >= 55'
+  'Chrome >= 61'
 ]
 const mobileBrowsers = [
   'Chrome >= 55',
-  'Firefox >= 53',
+  'Firefox >= 63',
   'Safari >= 10.3',
   'Edge >= 15',
   'Opera >= 42'
