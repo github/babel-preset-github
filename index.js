@@ -27,8 +27,8 @@ module.exports = function babelPresetGitHub(api, { modules = false, targets = {}
       require('@babel/plugin-syntax-dynamic-import').default,
 
       // Non-standard
-      require('@babel/plugin-proposal-class-properties').default,
       require('@babel/plugin-transform-flow-strip-types').default,
+      require('@babel/plugin-proposal-class-properties').default,
       // Custom 
       require('babel-plugin-transform-invariant-location'),
     ],
