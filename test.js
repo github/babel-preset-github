@@ -1,5 +1,5 @@
 const {loadOptions, transformSync} = require('@babel/core')
-const fail = process.stdout.isTTY ? '\x1b[0;32mx\x1b[0m' : 'x'
+const fail = process.stdout.isTTY ? '\x1b[0;31mx\x1b[0m' : 'x'
 const pass = process.stdout.isTTY ? '\x1b[0;32m✔\x1b[0m' : '✔'
 let exit = 0
 
@@ -18,6 +18,24 @@ const test = (name, pre, expected, options = { presets: ["./"] }) => {
     console.log(`${fail} ${name}`)
     console.log(e.stack)
     exit = 1
+  }
+}
+const testFail = (name, pre, ctor, options = { presets: ["./"] }) => {
+  try {
+    const actual = transformSync(pre, options).code
+    const err = new Error(`Actual: \`\`\`\n${actual}\n\`\`\`\n`)
+    console.log(`${fail} ${name}`)
+    console.log(`Expected transform to fail with ${ctor.name}`)
+    console.log(err.stack)
+    exit = 1
+  } catch (err) {
+    if (!(err instanceof ctor)) {
+      console.log(`${fail} ${name}`)
+      console.log(`Expected ${ctor.name} but got ${err.constructor.name}`)
+      exit = 1
+    } else {
+      console.log(`${pass} ${name}`)
+    }
   }
 }
 
@@ -81,7 +99,7 @@ test(
 )
 
 test(
-  'classes dont get transformed down on desktop',
+  'classes get transformed with custom profile',
   `class Foo {}`,
   /_classCallCheck/,
   { presets: [["./", { targets: { browsers: 'IE 11' } }]]}
@@ -114,16 +132,16 @@ test(
   { presets: [["./", { targets: { browsers: 'mobile' } }]]}
 )
 
-test(
-  'class properties work',
+testFail(
+  'class properties are not supported',
   `class Foo { x = 1; }`,
-  /defineProperty/
+  SyntaxError
 )
 
-test(
-  'class properties work on mobile',
+testFail(
+  'class properties are not supported on mobile',
   `class Foo { x = 1; }`,
-  /defineProperty/,
+  SyntaxError,
   { presets: [["./", { targets: { browsers: 'mobile' } }]]}
 )
 
