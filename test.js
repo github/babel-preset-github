@@ -20,6 +20,24 @@ const test = (name, pre, expected, options = { presets: ["./"] }) => {
     exit = 1
   }
 }
+const testFail = (name, pre, ctor, options = { presets: ["./"] }) => {
+  try {
+    const actual = transformSync(pre, options).code
+    const err = new Error(`Actual: \`\`\`\n${actual}\n\`\`\`\n`)
+    console.log(`${fail} ${name}`)
+    console.log(`Expected transform to fail with ${ctor.name}`)
+    console.log(err.stack)
+    exit = 1
+  } catch (err) {
+    if (!(err instanceof ctor)) {
+      console.log(`${fail} ${name}`)
+      console.log(`Expected ${ctor.name} but got ${err.constructor.name}`)
+      exit = 1
+    } else {
+      console.log(`${pass} ${name}`)
+    }
+  }
+}
 
 test(
   'json-strings works',
@@ -114,16 +132,16 @@ test(
   { presets: [["./", { targets: { browsers: 'mobile' } }]]}
 )
 
-test(
-  'class properties work',
+testFail(
+  'class properties are not supported',
   `class Foo { x = 1; }`,
-  /defineProperty/
+  SyntaxError
 )
 
-test(
-  'class properties work on mobile',
+testFail(
+  'class properties are not supported on mobile',
   `class Foo { x = 1; }`,
-  /defineProperty/,
+  SyntaxError,
   { presets: [["./", { targets: { browsers: 'mobile' } }]]}
 )
 

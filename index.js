@@ -28,7 +28,6 @@ module.exports = function babelPresetGitHub(api, { modules = false, targets = {}
 
       // Non-standard
       require('@babel/plugin-transform-flow-strip-types').default,
-      require('@babel/plugin-proposal-class-properties').default,
       // Custom 
       require('babel-plugin-transform-invariant-location'),
     ],
