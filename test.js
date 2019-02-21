@@ -1,5 +1,5 @@
 const {loadOptions, transformSync} = require('@babel/core')
-const fail = process.stdout.isTTY ? '\x1b[0;32mx\x1b[0m' : 'x'
+const fail = process.stdout.isTTY ? '\x1b[0;31mx\x1b[0m' : 'x'
 const pass = process.stdout.isTTY ? '\x1b[0;32m✔\x1b[0m' : '✔'
 let exit = 0
 
@@ -81,7 +81,7 @@ test(
 )
 
 test(
-  'classes dont get transformed down on desktop',
+  'classes get transformed with custom profile',
   `class Foo {}`,
   /_classCallCheck/,
   { presets: [["./", { targets: { browsers: 'IE 11' } }]]}
