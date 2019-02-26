@@ -13,10 +13,14 @@ const mobileBrowsers = [
   'Edge >= 15',
   'Opera >= 42'
 ]
-module.exports = function babelPresetGitHub(api, { modules = false, targets = {} }) {
+module.exports = function babelPresetGitHub(api, { env = true, modules = false, targets = {} }) {
   targets = Object.assign({}, { browsers: defaultBrowsers }, targets)
   if (targets.browsers === 'mobile') targets.browsers = mobileBrowsers
   if (targets.browsers === 'default') targets.browsers = defaultBrowsers
+  const presets = []
+  if (env) {
+    presets.push([require('@babel/preset-env').default, { modules, targets }])
+  }
   return {
     plugins: [
       // ES2019
@@ -31,9 +35,6 @@ module.exports = function babelPresetGitHub(api, { modules = false, targets = {}
       // Custom 
       require('babel-plugin-transform-invariant-location'),
     ],
-    presets: [
-      // ES6/2017
-      [require('@babel/preset-env').default, { modules, targets }]
-    ],
+    presets
   };
 };
