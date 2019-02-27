@@ -46,6 +46,13 @@ test(
 )
 
 test(
+  'json-strings transform is disabled with env=false',
+  `"a b"`,
+  `"a b";`,
+  { presets: [["./", { env: false }]]}
+)
+
+test(
   'optional-catch works',
   `try { throw '' } catch {}`,
   `try {
@@ -53,6 +60,33 @@ test(
 } catch (_unused) {}`,
 )
 
+test(
+  'optional-catch transform is disabled with env=false',
+  `try { throw '' } catch {}`,
+  `try {
+  throw '';
+} catch {}`,
+  { presets: [["./", { env: false }]]}
+)
+
+test(
+  'destructuring works',
+  `const { f } = { f: 1 }`,
+  `const _f = {
+  f: 1
+},
+      f = _f.f;`
+) 
+test(
+  'destructuring transform is disabled with env=false',
+  `const { f } = { f: 1 }`,
+  `const {
+  f
+} = {
+  f: 1
+};`,
+  { presets: [["./", { env: false }]]}
+)
 test(
   'import.meta works',
   `import.meta.foo`,
