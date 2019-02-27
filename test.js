@@ -94,6 +94,102 @@ test(
 )
 
 test(
+  'object rest is transformed',
+  `const { ...f } = {a:1}`,
+  /f = _extends\({}, /
+) 
+
+test(
+  'object rest is transformed with env=false',
+  `const { ...f } = {a:1}`,
+  /f = _extends\({}, /,
+  { presets: [["./", { env: false }]]}
+) 
+
+test(
+  'object rest is transformed with mobile browsers',
+  `const { ...f } = {a:1}`,
+  /f = _extends\({}, /,
+  { presets: [["./", { targets: { browsers: 'mobile' } }]]}
+) 
+
+test(
+  'object rest is transformed with mobile browsers even with env=false',
+  `const { ...f } = {a:1}`,
+  /f = _extends\({}, /,
+  { presets: [["./", { env: false, targets: { browsers: 'mobile' } }]]}
+) 
+
+test(
+  'object rest will use builtins if useBuiltIns=true',
+  `const { ...f } = {a:1}`,
+  /f = Object.assign/,
+  { presets: [["./", { useBuiltIns: true }]]}
+) 
+
+test(
+  'object rest will use builtins if useBuiltIns=true with env=false',
+  `const { ...f } = {a:1}`,
+  /f = Object.assign/,
+  { presets: [["./", { env: false, useBuiltIns: true }]]}
+) 
+
+test(
+  'object rest wont be transformed given modern browser set',
+  `const { ...f } = {a:1}`,
+  `const { ...f\n} = {\n  a: 1\n};`,
+  { presets: [["./", { targets: { browsers: ['Chrome > 60', 'Safari >= 11.1'] }}]]}
+) 
+
+test(
+  'object rest wont be transformed given modern browser set even with env=false',
+  `const { ...f } = {a:1}`,
+  `const { ...f\n} = {\n  a: 1\n};`,
+  { presets: [["./", { env: false, targets: { browsers: ['Chrome > 60', 'Safari >= 11.1'] }}]]}
+) 
+
+test(
+  'object spread is transformed',
+  `const f = { ...a }`,
+  /f = _objectSpread\({}, /
+) 
+
+test(
+  'object spread still works with env=false',
+  `const f = { ...a }`,
+  /f = _objectSpread\({}, /,
+  { presets: [["./", { env: false }]]}
+) 
+
+test(
+  'object spread still works if useBuiltIns=true',
+  `const f = { ...a }`,
+  /f = _objectSpread\({}, /,
+  { presets: [["./", { useBuiltIns: true }]]}
+) 
+
+test(
+  'object spread still works if env=false and useBuiltIns=true',
+  `const f = { ...a }`,
+  /f = _objectSpread\({}, /,
+  { presets: [["./", { env: false, useBuiltIns: true }]]}
+) 
+
+test(
+  'object spread wont be transformed given modern browser set',
+  `const f = { ...a }`,
+  `const f = { ...a\n};`,
+  { presets: [["./", { targets: { browsers: ['Chrome > 60', 'Safari >= 11.1'] }}]]}
+) 
+
+test(
+  'object spread wont be transformed given modern browser set even with env=false',
+  `const f = { ...a }`,
+  `const f = { ...a\n};`,
+  { presets: [["./", { env: false, targets: { browsers: ['Chrome > 60', 'Safari >= 11.1'] }}]]}
+) 
+
+test(
   'dynamic import works',
   `import('foo')`,
   `import('foo');`
