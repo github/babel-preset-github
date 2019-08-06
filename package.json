@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-github",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "GitHub.com's Babel configuration",
   "main": "index.js",
   "files": [],
